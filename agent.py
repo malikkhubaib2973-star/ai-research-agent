@@ -31,17 +31,17 @@ def run_research(topic: str, api_key: str) -> str:
         backstory="You are an expert analyst who finds reliable information and explains it simply.",
         tools=[web_search],
         llm=llm,
-        max_iter=5,
+        max_iter=10,
         verbose=False,
     )
 
     task = Task(
-    description=(
+ description=(
             "Research the topic: {topic}\n"
-            "Use ONLY the 'Web Search' tool, 2-4 times with different queries. "
-            "NEVER call any other tool such as web_open, browser, open_url or python. "
-            "Do NOT try to open links; rely only on the search result summaries. "
-            "After searching, write the final report directly."
+            "Use ONLY the 'Web Search' tool, at most 3 times, with different queries. "
+            "NEVER call any other tool. "
+            "After at most 3 searches, STOP searching and write the final report "
+            "directly, without calling any tool."
         ),
 
         expected_output=(
